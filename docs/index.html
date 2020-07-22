@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+
+
+<!-- === Header Starts === -->
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>GHFeat</title>
+
+  <link href="./assets/bootstrap.min.css" rel="stylesheet">
+  <link href="./assets/font.css" rel="stylesheet" type="text/css">
+  <link href="./assets/style.css" rel="stylesheet" type="text/css">
+</head>
+<!-- === Header Ends === -->
+
+
+<body>
+
+
+<!-- === Home Section Starts === -->
+<div class="section">
+  <!-- === Title Starts === -->
+  <div class="header">
+    <div class="logo">
+      <a href="https://genforce.github.io/" target="_blank"><img src="./assets/genforce.png"></a>
+    </div>
+    <div class="title", style="padding-top: 10pt;">
+      Generative Hierarchical Features from Synthesizing Images
+    </div>
+  </div>
+  <!-- === Title Ends === -->
+  <div class="author">
+    <a href="https://justimyhxu.github.io/academic.html" target="_blank">Yinghao Xu</a>*,&nbsp;
+    <a href="http://shenyujun.github.io/" target="_blank">Yujun Shen</a>*,&nbsp;
+    <a href="https://zhujiapeng.github.io/" target="_blank">Jiapeng Zhu</a>,&nbsp;
+    <a href="http://ceyuan.me/" target="_blank">Ceyuan Yang</a>,&nbsp;
+    <a href="http://bzhou.ie.cuhk.edu.hk" target="_blank">Bolei Zhou</a>
+  </div>
+  <div class="institution">
+    The Chinese University of Hong Kong
+  </div>
+  <div class="link">
+    <a href="https://arxiv.org/pdf/2007.10379.pdf" target="_blank">[Paper]</a>&nbsp;
+    <a href="https://github.com/genforce/ghfeat" target="_blank">[Code]</a>
+  </div>
+  <div class="teaser">
+    <img src="./assets/framework.jpg">
+  </div>
+</div>
+<!-- === Home Section Ends === -->
+
+
+<!-- === Overview Section Starts === -->
+<div class="section">
+  <div class="title">Overview</div>
+  <div class="body">
+    In this work, we argue that <i>the pre-trained GAN generator can be considered as a learned multi-scale loss</i>.
+    Training with it can bring highly competitive hierarchical and disentangled visual features,
+    which we call <i>Generative Hierarchical Features (GH-Feat)</i>.
+    We further show that <i>GH-Feat</i> facilitates a wide range of
+    not only generative but more importantly discriminative tasks, including face verification,
+    landmark detection, layout prediction, transfer learning, style mixing, image editing, <i>etc</i>.
+  </div>
+</div>
+<!-- === Overview Section Ends === -->
+
+
+<!-- === Result Section Starts === -->
+<div class="section">
+  <div class="title">A Wide Range of Applications with GH-Feat</div>
+  <div class="body">
+
+    <p style="margin-top: 10pt; text-align:center; font-size:25px; font-weight:bold">Discriminative Tasks<p>
+
+    <p style="margin-top: 10pt; margin-bottom: 5pt;">Indoor scene layout prediction</p>
+    <img src="./assets/layout.jpg" width="100%">
+
+    <p style="margin-top: 10pt; margin-bottom: 5pt;">Facial landmark detection</p>
+    <img src="./assets/landmark.jpg" width="100%">
+
+    <p style="margin-top: 10pt; text-align:center; font-size:25px; font-weight:bold">Generative Tasks<p>
+
+    <p style="margin-top: 10pt; margin-bottom: 5pt;">Image harmonization</p>
+    <img src="./assets/harmonization.jpg" width="100%">
+
+    <p style="margin-top: 10pt; margin-bottom: 5pt;">Local Editing</p>
+    <img src="./assets/local_editing.jpg" width="100%">
+  </div>
+</div>
+<!-- === Result Section Ends === -->
+
+
+<!-- === Reference Section Starts === -->
+<div class="section">
+  <div class="bibtex">BibTeX</div>
+<pre>
+@article{xu2020ghfeat,
+  title   = {Generative Hierarchical Features from Synthesizing Images},
+  author  = {Xu, Yinghao and Shen, Yujun and Zhu, Jiapeng and Yang, Ceyuan and Zhou, Bolei},
+  journal = {arXiv preprint arXiv:2007.10379},
+  year    = {2020}
+}
+</pre>
+
+  <div class="ref">Related Work</div>
+  <div class="citation">
+    <div class="image"><img src="./assets/stylegan.jpg"></div>
+    <div class="comment">
+      <a href="https://github.com/NVlabs/stylegan" target="_blank">
+        T. Karras, S. Laine, T. Aila.
+        A Style-Based Generator Architecture for Generative Adversarial Networks.
+        CVPR 2019.</a><br>
+      <b>Comment:</b>
+      Proposes style-based generator for high-quality image synthesis.
+    </div>
+  </div>
+  <div class="citation">
+    <div class="image"><img src="./assets/bigbigan.jpg"></div>
+    <div class="comment">
+      <a href="https://papers.nips.cc/paper/9240-large-scale-adversarial-representation-learning.pdf" target="_blank">
+        J. Donahue and K. Simonyan.
+        Large Scale Adversarial Representation Learning.
+        NeurIPS 2019.</a><br>
+      <b>Comment:</b>
+      Employs BigGAN for representation learning by training an encoder together with the BigGAN generator.
+    </div>
+  </div>
+  <div class="citation">
+    <div class="image"><img src="./assets/alae.jpg"></div>
+    <div class="comment">
+      <a href="https://github.com/podgorskiy/ALAE" target="_blank">
+        S. Pidhorskyi, D. Adjeroh, G. Doretto.
+        Adversarial Latent Autoencoders.
+        CVPR 2020.</a><br>
+      <b>Comment:</b>
+      Learns an auto-encoder based on the StyleGAN structure for disentangled representation learning.
+    </div>
+  </div>
+  <div class="citation">
+    <div class="image"><img src="./assets/idinvert.jpg"></div>
+    <div class="comment">
+      <a href="https://genforce.github.io/idinvert/" target="_blank">
+        J. Zhu, Y. Shen, D. Zhao, B. Zhou.
+        In-Domain GAN Inversion for Real Image Editing.
+        ECCV 2020.</a><br>
+      <b>Comment:</b>
+      Applies well-trained StyleGAN models for generative tasks, such as real image editing.
+    </div>
+  </div>
+  <div class="citation">
+    <div class="image"><img src="./assets/moco.jpg"></div>
+    <div class="comment">
+      <a href="https://github.com/facebookresearch/moco" target="_blank">
+        K. He, H. Fan, Y. Wu, S. Xie, R. Girshick.
+        Momentum Contrast for Unsupervised Visual Representation Learning.
+        CVPR 2020.</a><br>
+      <b>Comment:</b>
+      Builds a dynamic dictionary with a queue and a moving-averaged encoder for contrastive learning.
+    </div>
+  </div>
+
+</div>
+<!-- === Reference Section Ends === -->
+
+
+</body>
+</html>
