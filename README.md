@@ -5,7 +5,7 @@
 
 > **Generative Hierarchical Features from Synthesizing Images** <br>
 > Yinghao Xu*, Yujun Shen*, Jiapeng Zhu, Ceyuan Yang, Bolei Zhou <br>
-> *arXiv preprint arXiv:2007.10379*
+> *Computer Vision and Pattern Recognition (CVPR), 2021 (**Oral**)*
 
 [[Paper](https://arxiv.org/pdf/2007.10379.pdf)]
 [[Project Page](https://genforce.github.io/ghfeat/)]
@@ -40,11 +40,11 @@ Multi-level style mixing
 ## BibTeX
 
 ```bibtex
-@article{xu2020generative,
-  title   = {Generative Hierarchical Features from Synthesizing Images},
-  author  = {Xu, Yinghao and Shen, Yujun and Zhu, Jiapeng and Yang, Ceyuan and Zhou, Bolei},
-  journal = {arXiv preprint arXiv:2007.10379},
-  year    = {2020}
+@inproceedings{xu2021generative,
+  title     = {Generative Hierarchical Features from Synthesizing Images},
+  author    = {Xu, Yinghao and Shen, Yujun and Zhu, Jiapeng and Yang, Ceyuan and Zhou, Bolei},
+  booktitle = {CVPR},
+  year      = {2021}
 }
 ```
 
