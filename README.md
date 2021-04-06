@@ -10,58 +10,83 @@
 [[Paper](https://arxiv.org/pdf/2007.10379.pdf)]
 [[Project Page](https://genforce.github.io/ghfeat/)]
 
-In this repository, we show that *well-trained GAN generators can be used as training supervision* to learn hierarchical and disentangled visual features. We call this feature as *Generative Hierarchical Feature (GH-Feat)*. Properly learned from a novel hierarchical encoder, *GH-Feat* is able to facilitate both discriminative and generative visual tasks, including face verification,  landmark detection,  layout prediction, transfer learning, style mixing, and image editing, *etc*. Some results are shown as follows.
+In this work, we show that *well-trained GAN generators can be used as training supervision* to learn hierarchical visual features. We call this feature as *Generative Hierarchical Feature (GH-Feat)*. Properly learned from a novel hierarchical encoder, *GH-Feat* is able to facilitate both discriminative and generative visual tasks, including face verification,  landmark detection, layout prediction, transfer learning, style mixing, image editing, *etc*.
 
-## Requirements
+## Usage
 
-We provide the environment.yml to build a conda virtual environment to run our code.
+### Environment
+
+Before running the code, please setup the environment with
+
 ```shell
 conda env create -f environment.yml
 conda activate ghfeat
 ```
 
-## Training
-Different with [IDInvert](https://github.com/genforce/idinvert), we use the official generator from [StyleGAN](https://github.com/NVlabs/stylegan). 
-Please download the pre-trained generators from the following links. For each model, it contains the GAN generator and discriminator trained by ourselves following the [StyleGAN](https://github.com/NVlabs/stylegan). 
+### Testing
+
+The following script can be used to extract GH-Feat from a list of images.
+
+```shell
+python extract_ghfeat.py ${ENCODER_PATH} ${IMAGE_LIST} -o ${OUTPUT_DIR}
+```
+
+We provide some well-learned encoders for inference.
 
 | Path | Description
 | :--- | :----------
-|[face_256x256]()    | StyleGAN trained with [FFHQ](https://github.com/NVlabs/ffhq-dataset) dataset.
-|[tower_256x256]()   | StyleGAN trained with [LSUN Tower](https://github.com/fyu/lsun) dataset.
-|[bedroom_256x256]() | StyleGAN trained with [LSUN Bedroom](https://github.com/fyu/lsun) dataset.
+|[face_256x256](https://www.dropbox.com/s/844koj8shv9y4gh/ghfeat-encoder-tower-256.pkl?dl=0)      | GH-Feat encoder trained on [FF-HQ](https://github.com/NVlabs/ffhq-dataset) dataset.
+|[tower_256x256](https://www.dropbox.com/s/9lrof8l54t2s9lx/ghfeat-encoder-ffhq-256.pkl?dl=0)      | GH-Feat encoder trained on [LSUN Tower](https://github.com/fyu/lsun) dataset.
+|[bedroom_256x256](https://www.dropbox.com/s/rxjzd4hsvlvbydi/ghfeat-encoder-bedroom-256.pkl?dl=0) | GH-Feat encoder trained on [LSUN Bedroom](https://github.com/fyu/lsun) dataset.
 
-After downloading the pretained generator, you can specify the training and validation data path to train ghfeat encoder.
-```shell
-python train_ghfeat.py  $TRAINING_DATA_PATH  $VAL_DATA_PATH  $GENERATOR_PATH  --num_gpus $NUM_GPUS --depth $ENCODER_DEPTH 
-```
-Arguments:
-- TRAINING_DATA_PATH, VAL_DATA_PATH, GENERATOR_PATH refers the paths of training data, validation data and the official stylegan generator.
-- `--num_gpus`: number of GPUS.
-- `--depth`: specify the depth of resnet encoder, default is 18.
+### Training
 
-We also provide a slurm script to schedule your jobs by the following sctipts:
+Given a well-trained [StyleGAN](https://github.com/NVlabs/stylegan) generator, our hierarchical encoder is trained with the objective of image reconstruction.
+
 ```shell
-srun.sh $PARTITION $GPU_NUM python train_ghfeat.py  $TRAINING_DATA_PATH  $VAL_DATA_PATH  $GENERATOR_PATH  --num_gpus $NUM_GPUS --depth $ENCODER_DEPTH 
+python train_ghfeat.py \
+       ${TRAIN_DATA_PATH} \
+       ${VAL_DATA_PATH} \
+       ${GENERATOR_PATH} \
+       --num_gpus ${NUM_GPUS}
 ```
 
-## Testing
-After training your ghfeat, you can use `extract_ghfeat.py` to extract the ghfeat for real-world images.
-The following table provide the pre-trained ghfeat encoder on various dataset.
+Here, the `train_data` and `val_data` can be created by [this script](https://github.com/NVlabs/stylegan/blob/master/dataset_tool.py). Note that, according to the official [StyleGAN](https://github.com/NVlabs/stylegan) repo, the dataset is prepared in the multi-scale manner, but our encoder training only requires the data at the largest resolution. Hence, please specify the **path** to the `tfrecords` with the target resolution instead of the directory of all the `tfrecords` files.
+
+Users can also train the encoder with slurm:
+
+```shell
+srun.sh ${PARTITION} ${NUM_GPUS} \
+        python train_ghfeat.py \
+               ${TRAIN_DATA_PATH} \
+               ${VAL_DATA_PATH} \
+               ${GENERATOR_PATH} \
+               --num_gpus ${NUM_GPUS}
+```
+
+We provide some pre-trained generators as follows.
 
 | Path | Description
 | :--- | :----------
-|[face_256x256]()    | GH-Feat encoder trained [FFHQ](https://github.com/NVlabs/ffhq-dataset) dataset.
-|[tower_256x256]()   | GH-Feat encoder trained with [LSUN Tower](https://github.com/fyu/lsun) dataset.
-|[bedroom_256x256]() | GH-Feat encoder trained with [LSUN Bedroom](https://github.com/fyu/lsun) dataset.
+|[face_256x256](https://www.dropbox.com/s/r068a4q2wcrs5kv/stylegan-ffhq-256.pkl?dl=0)        | StyleGAN trained on [FFHQ](https://github.com/NVlabs/ffhq-dataset) dataset.
+|[tower_256x256](https://www.dropbox.com/s/nme0ka0zjx81r0q/stylegan-tower-256.pkl?dl=0)      | StyleGAN trained on [LSUN Tower](https://github.com/fyu/lsun) dataset.
+|[bedroom_256x256](https://www.dropbox.com/s/1c8p1m0c6pv2cqr/stylegan-bedrooms-256.pkl?dl=0) | StyleGAN trained on [LSUN Bedroom](https://github.com/fyu/lsun) dataset.
 
-```
-python extract_ghfeat.py $ENCODER_PATH $IMAGE_LIST
-```
-Arguments:
-- $ENCODER_PATH denotes the pre-trained encoder path.
-- $IMAGE_LIST refers the path of the image list path. 
+### Codebase Description
 
-## Discriminative Tasks
+- Most codes are directly borrowed from [StyleGAN](https://github.com/NVlabs/stylegan) repo.
+- Structure of the proposed hierarchical encoder: `training/networks_ghfeat.py`
+- Training loop of the encoder: `training/training_loop_ghfeat.py`
+- To feed GH-Feat produced by the encoder to the generator as layer-wise style codes, we slightly modify `training/networks_stylegan.py`. (See Line 263 and Line 477).
+- Main script for encoder training: `train_ghfeat.py`.
+- Script for extracting GH-Feat from images: `extract_ghfeat.py`.
+- VGG model for computing perceptual loss: `perceptual_model.py`.
+
+## Results
+
+We show some results achieved by GH-Feat on a variety of downstream visual tasks.
+
+### Discriminative Tasks
 
 Indoor scene layout prediction
 ![image](./docs/assets/layout.jpg)
@@ -72,7 +97,7 @@ Facial landmark detection
 Face verification (face reconstruction)
 ![image](./docs/assets/face_verification.jpg)
 
-## Generative Tasks
+### Generative Tasks
 
 Image harmonization
 ![image](./docs/assets/harmonization.jpg)
@@ -96,5 +121,3 @@ Multi-level style mixing
   year      = {2021}
 }
 ```
-
-## Code Coming Soon
