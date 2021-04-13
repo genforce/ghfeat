@@ -35,8 +35,8 @@ We provide some well-learned encoders for inference.
 
 | Path | Description
 | :--- | :----------
-|[face_256x256](https://www.dropbox.com/s/844koj8shv9y4gh/ghfeat-encoder-tower-256.pkl?dl=0)      | GH-Feat encoder trained on [FF-HQ](https://github.com/NVlabs/ffhq-dataset) dataset.
-|[tower_256x256](https://www.dropbox.com/s/9lrof8l54t2s9lx/ghfeat-encoder-ffhq-256.pkl?dl=0)      | GH-Feat encoder trained on [LSUN Tower](https://github.com/fyu/lsun) dataset.
+|[face_256x256](https://www.dropbox.com/s/9lrof8l54t2s9lx/ghfeat-encoder-ffhq-256.pkl?dl=0)      | GH-Feat encoder trained on [FF-HQ](https://github.com/NVlabs/ffhq-dataset) dataset.
+|[tower_256x256](https://www.dropbox.com/s/844koj8shv9y4gh/ghfeat-encoder-tower-256.pkl?dl=0)      | GH-Feat encoder trained on [LSUN Tower](https://github.com/fyu/lsun) dataset.
 |[bedroom_256x256](https://www.dropbox.com/s/rxjzd4hsvlvbydi/ghfeat-encoder-bedroom-256.pkl?dl=0) | GH-Feat encoder trained on [LSUN Bedroom](https://github.com/fyu/lsun) dataset.
 
 ### Training
